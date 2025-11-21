@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/logo-white.svg";
 
 const navLinks = [
@@ -16,6 +16,7 @@ const navLinks = [
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,108 +26,180 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
+  // Handle navigation clicks with smooth scroll
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    
+    const hash = href.replace('/', '');
+    const isHomePage = location.pathname === '/';
+    
+    if (isHomePage) {
+      // Already on home page, scroll to section
+      const element = document.querySelector(hash);
+      if (element) {
+        const offset = 80; // Navbar height
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    } else {
+      // Navigate to home page with hash
+      window.location.href = `/${hash}`;
+    }
+  };
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? "bg-card/95 backdrop-blur-md shadow-lg" : "bg-transparent"
-    }`}>
-      <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            {isScrolled ? (
-              <img src="/realestate-exam-logo-outline.svg" alt="RealMind" className="h-10" />
-            ) : (
-              <img src={logo} alt="RealMind" className="h-12" />
-            )}
-            <h1 className={`text-xl font-bold font-varela transition-colors ${
-              isScrolled ? "text-foreground" : "text-white"
-            }`}>RealMind</h1>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={`/${link.href}`}
-                className={`font-medium transition-colors hover:text-accent ${
-                  isScrolled ? "text-foreground" : "text-white"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-4">
-            <Link to="/agencies">
-              <Button
-                className={`rounded-full ${
-                  isScrolled 
-                    ? "bg-green-600 hover:bg-green-700 text-white" 
-                    : "bg-green-500 hover:bg-green-600 text-white"
-                }`}
-              >
-                סוכנויות נדלן
-              </Button>
+    <>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? "bg-white/40 dark:bg-card/40 backdrop-blur-xl shadow-xl border-b border-white/20 dark:border-white/10" 
+          : "bg-transparent"
+      }`}>
+        <div className="container mx-auto px-6">
+          <div className="flex items-center justify-between h-20">
+            {/* Logo */}
+            <Link to="/" className="flex items-center gap-2">
+              {isScrolled ? (
+                <img src="/realestate-exam-logo-outline.svg" alt="RealMind" className="h-10" />
+              ) : (
+                <img src={logo} alt="RealMind" className="h-12" />
+              )}
+              <h1 className={`text-xl font-bold font-varela transition-colors ${
+                isScrolled ? "text-foreground" : "text-white"
+              }`}>RealMind</h1>
             </Link>
-            <Button
-              className="bg-accent hover:bg-accent/90 text-white rounded-full"
-              onClick={() => window.location.href = 'https://realmind.netlify.app/login'}
-            >
-              הירשם עכשיו
-            </Button>
-          </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className={`md:hidden ${isScrolled ? "text-foreground" : "text-white"}`}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden py-6 bg-card rounded-b-2xl shadow-xl">
-            <div className="flex flex-col gap-4">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
-                <Link
+                <a
                   key={link.href}
-                  to={`/${link.href}`}
-                  className="text-foreground hover:text-accent font-medium transition-colors px-4 py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  href={`/${link.href}`}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className={`font-medium transition-colors hover:text-accent cursor-pointer ${
+                    isScrolled ? "text-foreground" : "text-white"
+                  }`}
                 >
                   {link.label}
-                </Link>
+                </a>
               ))}
-              <div className="px-4">
-                <Link to="/agencies" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button
-                    className="w-full bg-green-600 hover:bg-green-700 text-white rounded-full"
-                  >
-                    סוכנויות נדלן
-                  </Button>
-                </Link>
-              </div>
-              <div className="px-4 pt-2">
+            </div>
+
+            {/* Desktop CTA */}
+            <div className="hidden md:flex items-center gap-4">
+              <Link to="/agencies">
                 <Button
-                  className="w-full bg-accent hover:bg-accent/90 text-white rounded-full"
-                  onClick={() => {
-                    window.location.href = 'https://realmind.netlify.app/login';
-                    setIsMobileMenuOpen(false);
-                  }}
+                  className={`rounded-full ${
+                    isScrolled 
+                      ? "bg-green-600 hover:bg-green-700 text-white" 
+                      : "bg-green-500 hover:bg-green-600 text-white"
+                  }`}
                 >
-                  הירשם עכשיו
+                  סוכנויות נדלן
                 </Button>
-              </div>
+              </Link>
+              <Button
+                className="bg-accent hover:bg-accent/90 text-white rounded-full"
+                onClick={() => window.location.href = 'https://realmind.netlify.app/login'}
+              >
+                הירשם עכשיו
+              </Button>
+            </div>
+
+            {/* Mobile CTA Buttons */}
+            <div className="md:hidden flex items-center gap-2">
+              <Link to="/agencies">
+                <Button
+                  size="sm"
+                  className={`rounded-full text-xs px-3 py-1.5 ${
+                    isScrolled 
+                      ? "bg-green-600 hover:bg-green-700 text-white" 
+                      : "bg-green-500 hover:bg-green-600 text-white"
+                  }`}
+                >
+                  סוכנויות
+                </Button>
+              </Link>
+              <Button
+                size="sm"
+                className="bg-accent hover:bg-accent/90 text-white rounded-full text-xs px-3 py-1.5"
+                onClick={() => window.location.href = 'https://realmind.netlify.app/login'}
+              >
+                הירשם
+              </Button>
+              {/* Mobile Menu Button */}
+              <button
+                className={`relative z-[101] ${isScrolled ? "text-foreground" : "text-white"}`}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              >
+                {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
             </div>
           </div>
-        )}
+        </div>
+      </nav>
+
+      {/* Mobile Menu - Slide from side */}
+      <div className={`md:hidden fixed inset-0 z-[100] transition-opacity duration-300 ${
+        isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      }`}>
+        {/* Backdrop */}
+        <div 
+          className={`absolute inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300 ${
+            isMobileMenuOpen ? 'opacity-100' : 'opacity-0'
+          }`}
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+        {/* Side Menu Panel */}
+        <div className={`absolute top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-white/90 dark:bg-card/90 backdrop-blur-xl shadow-2xl border-l border-white/30 dark:border-white/20 overflow-y-auto transform transition-transform duration-300 ease-out ${
+          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}>
+          <div className="p-6">
+            {/* Close button */}
+            <div className="flex justify-start mb-8">
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-foreground hover:text-accent transition-colors p-2 -mr-2"
+              >
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            
+            {/* Menu Items */}
+            <div className="flex flex-col gap-2">
+              {navLinks.map((link, index) => (
+                <a
+                  key={link.href}
+                  href={`/${link.href}`}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="text-foreground hover:text-accent hover:bg-accent/10 font-medium text-lg transition-all duration-200 rounded-lg px-4 py-3 cursor-pointer"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
-    </nav>
+    </>
   );
 };
 
