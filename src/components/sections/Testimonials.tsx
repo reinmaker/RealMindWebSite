@@ -6,19 +6,22 @@ const testimonials = [
     name: "שרה כהן",
     role: "מתווכת מוסמכת",
     content: "הפלטפורמה הכי טובה להכנה למבחן! ה-AI עזר לי לזהות בדיוק את הנושאים שהיו לי קשיים בהם והתמקדתי בהם. עברתי את המבחן בפעם הראשונה!",
-    rating: 5
+    rating: 5,
+    image: "https://mp.astria.ai/cf3pg88usohfye11go0f2a39upz6"
   },
   {
     name: "יוסי מאירי",
     role: "מתווך מוסמך",
     content: "הסימולטורים היו זהים למבחן האמיתי והתרגול עם הבינה המלאכותית באמת עשה את ההבדל. ההשקעה הכי משתלמת שעשיתי, והייתי עושה שוב בלי לחשוב פעמים.",
-    rating: 5
+    rating: 5,
+    image: "https://mp.astria.ai/7xrksafu4zi2ucwx5hfrzo4tux3o"
   },
   {
     name: "מיכל אברהם",
     role: "מתווכת מוסמכת",
-    content: "ההסברים המפורטים וההתאמה האישית עזרו לי להבין את החומר לעומק. הרגשתי הרבה יותר בטוחה ביום המבחן, והיום אני מתווכת מוסמכת.",
-    rating: 5
+    content: "ההסברים המפורטים וההתאמה האישית עזרו לי להבין את החומר לעומק. הרגשתי הרבה יותר בטוחה ביום המבחן, והיום אני מתווכת מוסמכת עם סוכנות משל עצמי.",
+    rating: 5,
+    image: "https://mp.astria.ai/ekjl8os1bsh32m2y47msu21ryuxl"
   }
 ];
 
@@ -71,11 +74,28 @@ const Testimonials = () => {
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <CardContent className="p-8">
-                <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-accent text-accent" />
-                  ))}
-                </div>
+                {testimonial.image && (
+                  <div className="mb-4 flex flex-col items-center">
+                    <img 
+                      src={testimonial.image} 
+                      alt={testimonial.name} 
+                      className="w-32 h-32 object-cover rounded-full mb-4"
+                      style={{ objectPosition: index === 0 ? '10% 30%' : index === 1 ? '55% 30%' : '40% 30%' }}
+                    />
+                    <div className="flex gap-1 justify-center">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="h-5 w-5 fill-accent text-accent" />
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {!testimonial.image && (
+                  <div className="flex gap-1 mb-4 justify-center">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-accent text-accent" />
+                    ))}
+                  </div>
+                )}
                 <p className="text-foreground mb-6 leading-relaxed text-lg">
                   "{testimonial.content}"
                 </p>

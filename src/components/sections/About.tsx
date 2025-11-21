@@ -50,7 +50,7 @@ const About = () => {
               className="bg-accent hover:bg-accent/90 text-white text-lg px-8 py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 group"
               onClick={() => window.location.href = 'https://realmind.netlify.app/login'}
             >
-              הצטרף אלינו עכשיו
+              אין מה לחכות הרשמו עכשיו והתחילו ללמוד
               <ArrowLeft className="mr-2 h-5 w-5 group-hover:-translate-x-1 transition-transform" />
             </Button>
           </div>

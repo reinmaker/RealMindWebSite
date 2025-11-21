@@ -23,6 +23,9 @@ const Footer = () => {
             <a href="#about" className="text-white/80 hover:text-white transition-colors">
               אודות
             </a>
+            <Link to="/agencies" className="text-white/80 hover:text-white transition-colors">
+              שותפויות
+            </Link>
             <Link to="/terms-of-service" className="text-white/80 hover:text-white transition-colors">
               תנאי שימוש
             </Link>

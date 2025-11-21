@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 import logo from "@/assets/logo-white.svg";
 
 const navLinks = [
-  { href: "#hero", label: "בית" },
-  { href: "#how-it-works", label: "איך זה עובד" },
-  { href: "#testimonials", label: "המלצות" },
-  { href: "#pricing", label: "מחירים" },
-  { href: "#faq", label: "שאלות נפוצות" },
-  { href: "#about", label: "אודות" }
+  { href: "#hero", label: "בית", isRoute: false },
+  { href: "#how-it-works", label: "איך זה עובד", isRoute: false },
+  { href: "#testimonials", label: "המלצות", isRoute: false },
+  { href: "#pricing", label: "מחירים", isRoute: false },
+  { href: "#faq", label: "שאלות נפוצות", isRoute: false },
+  { href: "#about", label: "אודות", isRoute: false }
 ];
 
 const Navbar = () => {
@@ -31,30 +32,45 @@ const Navbar = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#hero" className="flex flex-col items-center gap-1">
-            {!isScrolled && <img src={logo} alt="RealMind" className="h-12" />}
+          <Link to="/" className="flex items-center gap-2">
+            {isScrolled ? (
+              <img src="/realestate-exam-logo-outline.svg" alt="RealMind" className="h-10" />
+            ) : (
+              <img src={logo} alt="RealMind" className="h-12" />
+            )}
             <h1 className={`text-xl font-bold font-varela transition-colors ${
               isScrolled ? "text-foreground" : "text-white"
             }`}>RealMind</h1>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
-                href={link.href}
+                to={`/${link.href}`}
                 className={`font-medium transition-colors hover:text-accent ${
                   isScrolled ? "text-foreground" : "text-white"
                 }`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
           {/* Desktop CTA */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-4">
+            <Link to="/agencies">
+              <Button
+                className={`rounded-full ${
+                  isScrolled 
+                    ? "bg-green-600 hover:bg-green-700 text-white" 
+                    : "bg-green-500 hover:bg-green-600 text-white"
+                }`}
+              >
+                סוכנויות נדלן
+              </Button>
+            </Link>
             <Button
               className="bg-accent hover:bg-accent/90 text-white rounded-full"
               onClick={() => window.location.href = 'https://realmind.netlify.app/login'}
@@ -77,15 +93,24 @@ const Navbar = () => {
           <div className="md:hidden py-6 bg-card rounded-b-2xl shadow-xl">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
-                  href={link.href}
+                  to={`/${link.href}`}
                   className="text-foreground hover:text-accent font-medium transition-colors px-4 py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
+              <div className="px-4">
+                <Link to="/agencies" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button
+                    className="w-full bg-green-600 hover:bg-green-700 text-white rounded-full"
+                  >
+                    סוכנויות נדלן
+                  </Button>
+                </Link>
+              </div>
               <div className="px-4 pt-2">
                 <Button
                   className="w-full bg-accent hover:bg-accent/90 text-white rounded-full"

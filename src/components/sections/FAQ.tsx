@@ -31,8 +31,8 @@ const faqs = [
     answer: "המערכת שלנו נועדה לעזור לך להצליח, אבל אם לא תעבור - תוכל להמשיך להשתמש במערכת עד למועד המבחן הבא שלך."
   },
   {
-    question: "סוכני נדל\"ן, מעוניינים בשיתוף פעולה?",
-    answer: "נשמח לשתף פעולה איתך! צור איתנו קשר דרך כפתור הוואטסאפ ונדבר על אפשרויות שיתוף פעולה ותוכניות המלצה."
+    question: "אני ממש לא טכנולוגי, אני לא יודע איך להשתמש במערכת",
+    answer: "אל תדאג! המערכת שלנו תוכננה במיוחד להיות פשוטה ואינטואיטיבית לשימוש. כל מה שצריך זה להיכנס, לבחור מבחן ולהתחיל. המערכת מנחה אותך בכל שלב, והכל מוסבר בצורה ברורה. בנוסף, יש לנו צוות תמיכה זמין שמוכן לעזור לך בכל שאלה או בעיה. אם אתה יכול להשתמש בוואטסאפ או באימייל - אתה יכול להשתמש במערכת שלנו!"
   }
 ];
 
@@ -56,7 +56,7 @@ const FAQ = () => {
                 key={index} 
                 value={`item-${index}`}
                 className={`bg-card border border-border rounded-lg px-6 shadow-sm hover:shadow-md transition-shadow ${
-                  index === faqs.length - 1 ? 'bg-accent/5 border-accent/20' : ''
+                  index === faqs.length - 1 ? 'bg-white border-accent/20' : ''
                 }`}
               >
                 <AccordionTrigger className="text-right text-lg font-semibold text-foreground hover:text-accent hover:no-underline py-6">
