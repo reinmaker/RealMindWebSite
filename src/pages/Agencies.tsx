@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -48,6 +49,11 @@ const benefits = [
 ];
 
 const Agencies = () => {
+  useEffect(() => {
+    // Always scroll to top when the page loads
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
+
   return (
     <div className="min-h-screen">
       <Navbar />
