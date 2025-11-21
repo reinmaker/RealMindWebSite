@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 512 512" class="flex-shrink-0">
+  <defs>
+    <style>
+      .logo-stroke { 
+        stroke: black; 
+        fill: none; 
+        stroke-width: 22; 
+        stroke-linecap: round; 
+        stroke-linejoin: round; 
+      }
+      .logo-fill { 
+        fill: black; 
+      }
+    </style>
+  </defs>
+  <polygon class="logo-stroke" points="256,86 88,154 256,222 424,154 256,86"></polygon>
+  <polyline class="logo-stroke" points="228,200 228,244 256,256 284,244 284,200"></polyline>
+  <line class="logo-stroke" x1="356" y1="161" x2="356" y2="233"></line>
+  <circle class="logo-fill" cx="356" cy="256" r="14"></circle>
+  <polyline class="logo-stroke" points="96,308 256,196 416,308"></polyline>
+  <rect class="logo-stroke" x="120" y="308" width="272" height="148" rx="12" ry="12"></rect>
+  <rect class="logo-stroke" x="212" y="354" width="40" height="40" rx="3" ry="3"></rect>
+  <rect class="logo-stroke" x="260" y="354" width="40" height="40" rx="3" ry="3"></rect>
+  <rect class="logo-stroke" x="212" y="402" width="40" height="40" rx="3" ry="3"></rect>
+  <rect class="logo-stroke" x="260" y="402" width="40" height="40" rx="3" ry="3"></rect>
+</svg>
