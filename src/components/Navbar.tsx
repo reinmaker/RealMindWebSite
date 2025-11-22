@@ -117,7 +117,7 @@ const Navbar = () => {
               </Link>
               <Button
                 className="bg-accent hover:bg-accent/90 text-white rounded-full"
-                onClick={() => window.location.href = 'https://realmind.netlify.app/login'}
+                onClick={() => window.location.href = 'https://app.realmind.co.il'}
               >
                 הירשם עכשיו
               </Button>
@@ -140,7 +140,7 @@ const Navbar = () => {
               <Button
                 size="sm"
                 className="bg-accent hover:bg-accent/90 text-white rounded-full text-xs px-3 py-1.5"
-                onClick={() => window.location.href = 'https://realmind.netlify.app/login'}
+                onClick={() => window.location.href = 'https://app.realmind.co.il'}
               >
                 הירשם
               </Button>
