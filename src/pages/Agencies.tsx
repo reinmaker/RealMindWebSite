@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -49,11 +48,6 @@ const benefits = [
 ];
 
 const Agencies = () => {
-  useEffect(() => {
-    // Always scroll to top when the page loads
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, []);
-
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -79,7 +73,7 @@ const Agencies = () => {
               <Button 
                 size="lg" 
                 className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300"
-                onClick={() => window.location.href = 'mailto:contact@realmind.com'}
+                onClick={() => window.location.href = 'mailto:info@realmind.co.il'}
               >
                 <Mail className="mr-2 h-5 w-5" />
                 שלחו לנו אימייל
@@ -172,7 +166,7 @@ const Agencies = () => {
                   <Button 
                     size="lg" 
                     className="bg-accent hover:bg-accent/90 text-white text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-                    onClick={() => window.location.href = 'mailto:contact@realmind.com'}
+                    onClick={() => window.location.href = 'mailto:info@realmind.co.il'}
                   >
                     <Mail className="mr-2 h-5 w-5" />
                     שלחו לנו אימייל
@@ -206,7 +200,7 @@ const Agencies = () => {
             <Button 
               size="lg" 
               className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300"
-              onClick={() => window.location.href = 'mailto:contact@realmind.com'}
+              onClick={() => window.location.href = 'mailto:info@realmind.co.il'}
             >
               <Mail className="mr-2 h-5 w-5" />
               צרו קשר עכשיו

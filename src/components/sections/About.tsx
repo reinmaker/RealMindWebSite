@@ -47,11 +47,11 @@ const About = () => {
           <div className="text-center">
             <Button 
               size="lg" 
-              className="bg-accent hover:bg-accent/90 text-white text-sm sm:text-lg px-4 sm:px-8 py-4 sm:py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 group w-full sm:w-auto"
-              onClick={() => window.location.href = 'https://app.realmind.co.il'}
+              className="bg-accent hover:bg-accent/90 text-white text-lg px-8 py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 group"
+              onClick={() => window.location.href = 'https://realmind.netlify.app/login'}
             >
-              <span className="whitespace-normal sm:whitespace-nowrap">אין מה לחכות הרשמו עכשיו והתחילו ללמוד</span>
-              <ArrowLeft className="mr-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:-translate-x-1 transition-transform flex-shrink-0" />
+              אין מה לחכות הרשמו עכשיו והתחילו ללמוד
+              <ArrowLeft className="mr-2 h-5 w-5 group-hover:-translate-x-1 transition-transform" />
             </Button>
           </div>
         </div>

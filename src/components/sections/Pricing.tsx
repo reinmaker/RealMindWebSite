@@ -59,7 +59,7 @@ const Pricing = () => {
                 <Button 
                   size="lg" 
                   className="w-full bg-accent hover:bg-accent/90 text-white text-lg py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
-                  onClick={() => window.location.href = 'https://app.realmind.co.il'}
+                  onClick={() => window.location.href = 'https://realmind.netlify.app/login'}
                 >
                   הירשם עכשיו
                   <ArrowLeft className="mr-2 h-5 w-5 group-hover:-translate-x-1 transition-transform" />

@@ -29,7 +29,7 @@ import instructorOk from "@/assets/instructor-ok.png";
 
 const Testimonials = () => {
   return (
-    <section id="testimonials" className="py-24 bg-secondary relative overflow-hidden">
+    <section id="testimonials" className="pt-24 pb-0 md:py-24 bg-secondary relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
@@ -40,7 +40,7 @@ const Testimonials = () => {
           </p>
         </div>
         
-        <div className="grid lg:grid-cols-2 gap-0 lg:gap-12 max-w-7xl mx-auto items-center mb-12">
+        <div className="grid lg:grid-cols-2 gap-0 lg:gap-12 max-w-7xl mx-auto items-center mb-0 md:mb-12">
           {/* Instructor Image */}
           <div className="flex justify-center animate-scale-in">
             <img 
@@ -75,20 +75,18 @@ const Testimonials = () => {
             >
               <CardContent className="p-8">
                 {testimonial.image && (
-                  <div className="mb-6 flex flex-col items-center">
+                  <div className="mb-4 flex flex-col items-center">
                     <img 
                       src={testimonial.image} 
                       alt={testimonial.name} 
                       className="w-32 h-32 object-cover rounded-full mb-4"
                       style={{ objectPosition: index === 0 ? '10% 30%' : index === 1 ? '55% 30%' : '40% 30%' }}
                     />
-                    <div className="flex gap-1 justify-center mb-3">
+                    <div className="flex gap-1 justify-center">
                       {[...Array(testimonial.rating)].map((_, i) => (
                         <Star key={i} className="h-5 w-5 fill-accent text-accent" />
                       ))}
                     </div>
-                    <p className="font-bold text-foreground">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
                   </div>
                 )}
                 {!testimonial.image && (
@@ -98,9 +96,13 @@ const Testimonials = () => {
                     ))}
                   </div>
                 )}
-                <p className="text-foreground leading-relaxed text-lg">
+                <p className="text-foreground mb-6 leading-relaxed text-lg">
                   "{testimonial.content}"
                 </p>
+                <div className="border-t border-border pt-4">
+                  <p className="font-bold text-foreground">{testimonial.name}</p>
+                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                </div>
               </CardContent>
             </Card>
           ))}

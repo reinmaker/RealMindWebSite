@@ -137,7 +137,7 @@ const WhyHarder = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a 
-                  href="https://app.realmind.co.il"
+                  href="https://realmind.netlify.app/login"
                   className="inline-flex items-center justify-center px-8 py-4 bg-accent hover:bg-accent/90 text-white text-lg font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   התחילו עכשיו
