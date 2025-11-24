@@ -75,18 +75,20 @@ const Testimonials = () => {
             >
               <CardContent className="p-8">
                 {testimonial.image && (
-                  <div className="mb-4 flex flex-col items-center">
+                  <div className="mb-6 flex flex-col items-center">
                     <img 
                       src={testimonial.image} 
                       alt={testimonial.name} 
                       className="w-32 h-32 object-cover rounded-full mb-4"
                       style={{ objectPosition: index === 0 ? '10% 30%' : index === 1 ? '55% 30%' : '40% 30%' }}
                     />
-                    <div className="flex gap-1 justify-center">
+                    <div className="flex gap-1 justify-center mb-3">
                       {[...Array(testimonial.rating)].map((_, i) => (
                         <Star key={i} className="h-5 w-5 fill-accent text-accent" />
                       ))}
                     </div>
+                    <p className="font-bold text-foreground">{testimonial.name}</p>
+                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
                   </div>
                 )}
                 {!testimonial.image && (
@@ -96,13 +98,9 @@ const Testimonials = () => {
                     ))}
                   </div>
                 )}
-                <p className="text-foreground mb-6 leading-relaxed text-lg">
+                <p className="text-foreground leading-relaxed text-lg">
                   "{testimonial.content}"
                 </p>
-                <div className="border-t border-border pt-4">
-                  <p className="font-bold text-foreground">{testimonial.name}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                </div>
               </CardContent>
             </Card>
           ))}
