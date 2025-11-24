@@ -1,5 +1,6 @@
 import logo from "@/assets/logo-white.svg";
 import { Link } from "react-router-dom";
+import { Facebook, Instagram } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -11,9 +12,29 @@ const Footer = () => {
           </div>
           
           <div className="text-center md:text-right">
-            <p className="text-white/80">
+            <p className="text-white/80 mb-4">
               © {new Date().getFullYear()} Real Mind. כל הזכויות שמורות.
             </p>
+            <div className="flex gap-4 justify-center">
+              <a 
+                href="https://www.facebook.com/RealMindIsrael" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-white transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="h-6 w-6" />
+              </a>
+              <a 
+                href="https://www.instagram.com/realmindisrael/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-white transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="h-6 w-6" />
+              </a>
+            </div>
           </div>
           
           <div className="flex gap-6">
