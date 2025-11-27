@@ -7,7 +7,10 @@ const Hero = () => {
     <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 pb-16 md:pt-0 md:pb-0">
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(https://mp.astria.ai/mrr0ueoh57x80kc2xhk76lx0w95p)` }}
+        style={{ 
+          backgroundImage: `url(https://mp.astria.ai/mrr0ueoh57x80kc2xhk76lx0w95p)`,
+          filter: 'blur(4px)'
+        }}
       ></div>
       <div className="absolute inset-0 bg-black/10"></div>
       
