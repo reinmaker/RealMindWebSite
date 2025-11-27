@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "@/assets/logo-white.svg";
 
 const navLinks = [
@@ -16,8 +16,6 @@ const navLinks = [
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,32 +24,6 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    setIsMobileMenuOpen(false);
-    
-    const hash = href.replace('/', '');
-    const isHomePage = location.pathname === '/';
-    
-    if (isHomePage) {
-      // Already on home page, scroll to section
-      const element = document.querySelector(hash);
-      if (element) {
-        const offset = 80; // Navbar height
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - offset;
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    } else {
-      // Navigate to home page with hash
-      navigate(`/${hash}`);
-    }
-  };
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -74,16 +46,15 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
-                href={`/${link.href}`}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className={`font-medium transition-colors hover:text-accent cursor-pointer ${
+                to={`/${link.href}`}
+                className={`font-medium transition-colors hover:text-accent ${
                   isScrolled ? "text-foreground" : "text-white"
                 }`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -144,14 +115,14 @@ const Navbar = () => {
           <div className="md:hidden py-6 bg-card rounded-b-2xl shadow-xl">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
-                  href={`/${link.href}`}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className="text-foreground hover:text-accent font-medium transition-colors px-4 py-2 cursor-pointer"
+                  to={`/${link.href}`}
+                  className="text-foreground hover:text-accent font-medium transition-colors px-4 py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
               <div className="px-4">
                 <Link to="/agencies" onClick={() => setIsMobileMenuOpen(false)}>

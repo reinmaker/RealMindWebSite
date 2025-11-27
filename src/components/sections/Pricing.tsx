@@ -40,7 +40,7 @@ const Pricing = () => {
             
             <CardHeader className="text-center pb-8 pt-12">
               <div className="mb-4">
-                <span className="text-5xl font-bold text-foreground">₪129</span>
+                <span className="text-5xl font-bold text-foreground">₪169</span>
               </div>
               <p className="text-muted-foreground text-lg">תשלום חד פעמי</p>
             </CardHeader>
@@ -59,7 +59,7 @@ const Pricing = () => {
                 <Button 
                   size="lg" 
                   className="w-full bg-accent hover:bg-accent/90 text-white text-lg py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
-                  onClick={() => window.location.href = 'https://app.realmind.co.il'}
+                  onClick={() => window.location.href = 'https://realmind.netlify.app/login'}
                 >
                   הירשם עכשיו
                   <ArrowLeft className="mr-2 h-5 w-5 group-hover:-translate-x-1 transition-transform" />
