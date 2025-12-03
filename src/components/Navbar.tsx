@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/logo-white.svg";
 
 const navLinks = [
@@ -16,6 +16,7 @@ const navLinks = [
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +25,22 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    
+    // If we're on the home page, scroll to the section
+    if (location.pathname === '/') {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Otherwise, navigate to home page with hash
+      window.location.href = `/${href}`;
+    }
+  };
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -46,15 +63,16 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.href}
-                to={`/${link.href}`}
-                className={`font-medium transition-colors hover:text-accent ${
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className={`font-medium transition-colors hover:text-accent cursor-pointer ${
                   isScrolled ? "text-foreground" : "text-white"
                 }`}
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
           </div>
 
@@ -115,14 +133,14 @@ const Navbar = () => {
           <div className="md:hidden py-6 bg-card rounded-b-2xl shadow-xl">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
-                <Link
+                <a
                   key={link.href}
-                  to={`/${link.href}`}
-                  className="text-foreground hover:text-accent font-medium transition-colors px-4 py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="text-foreground hover:text-accent font-medium transition-colors px-4 py-2 cursor-pointer"
                 >
                   {link.label}
-                </Link>
+                </a>
               ))}
               <div className="px-4">
                 <Link to="/agencies" onClick={() => setIsMobileMenuOpen(false)}>
